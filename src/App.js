@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RxPlayer from "rx-player";
 import './App.css';
+import ChannelUrl from './data/channels.json';
 
 class App extends Component {
 
@@ -45,10 +46,12 @@ class App extends Component {
   onUpdatePlayerInst = () => {
     const { player } = this.state;
 
+    console.log(" channel name : " + ChannelUrl.map((data) => { return data.name }));
+
     player.loadVideo({
-        url: "https://bitmovin-a.akamaihd.net/content/playhouse-vr/mpds/105560.mpd",
-        transport: "dash",
-        autoPlay: true
+        url: ChannelUrl.map((data) => { return data.url }),
+        transport: ChannelUrl.map((data) => { return data.transport }),
+        autoPlay: ChannelUrl.map((data) => { return data.autoPlay })
     });
 
     player.addEventListener("playerStateChange", (playerState) => {

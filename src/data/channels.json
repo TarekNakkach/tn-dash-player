@@ -1,0 +1,8 @@
+[
+  {
+      "name" : "local ch",
+      "url" : "https://bitmovin-a.akamaihd.net/content/playhouse-vr/mpds/105560.mpd",
+      "transport" : "dash",
+      "autoPlay" : true
+  }
+]
