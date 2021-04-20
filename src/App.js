@@ -6,7 +6,7 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state = {player : null, videoContainer : null};
+    this.state = {videoContainer : null, player : null};
   }
 
   render() {
@@ -19,39 +19,42 @@ class App extends Component {
     );
   }
 
-  /**
-   * @Description : After rendering the App divs we'll :
-   * 1 - create the player instance
-   * 2 - load the given video uri
-   * 3 - register all needed player events
-   * 
-   * */
   componentDidMount() {
-    this.state.videoContainer = document.getElementById("video-container");
-
-    this.state.player = new RxPlayer({
-        videoElement: this.state.videoContainer
-    });
-
-    this.loadVideo("https://bitmovin-a.akamaihd.net/content/playhouse-vr/mpds/105560.mpd");
-
-    this.state.player.addEventListener("playerStateChange", (playerState) => {
-        console.log("player state : " + playerState);
-    });
+    var vContainer = document.getElementById("video-container");
+    this.setVContainer(vContainer);
   }
-  
-  /**
-   * @Description : loadVideo - private API to load the DASH video uri to be played
-   * @params uri - the DASH video uri
-   * 
-   * */
-  loadVideo(uri) {
-    this.state.player.loadVideo({
-        url: uri,
+
+  setVContainer = (value) => {
+    this.setState({ videoContainer: value}, this.onUpdateVContainer);
+  };
+
+  onUpdateVContainer = () => {
+    const { videoContainer } = this.state;
+
+    var playerInst = new RxPlayer({
+        videoElement: videoContainer
+    });
+
+    this.setPlayerInst(playerInst);
+  };
+
+  setPlayerInst = (value) => {
+    this.setState({ player: value}, this.onUpdatePlayerInst);
+  };
+
+  onUpdatePlayerInst = () => {
+    const { player } = this.state;
+
+    player.loadVideo({
+        url: "https://bitmovin-a.akamaihd.net/content/playhouse-vr/mpds/105560.mpd",
         transport: "dash",
         autoPlay: true
     });
-  }
+
+    player.addEventListener("playerStateChange", (playerState) => {
+        console.log("player state : " + playerState);
+    });
+  };
 
   /**
    * @Description : stopVideo - stop the video playback
