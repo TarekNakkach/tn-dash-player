@@ -1,6 +1,6 @@
 {
     "appId": "io.ionic.TNPlayer",
-    "appName": "nameofyourapp",
+    "appName": "TNPlayer",
     "bundledWebRuntime": false,
     "npmClient": "npm",
     "webDir": "build",
