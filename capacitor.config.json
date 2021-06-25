@@ -1,0 +1,8 @@
+{
+    "appId": "io.ionic.TNPlayer",
+    "appName": "nameofyourapp",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "cordova": {}
+}
